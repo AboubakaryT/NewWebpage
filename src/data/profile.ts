@@ -93,7 +93,7 @@ export const projects: Project[] = [
   {
     slug: 'esp32-telemetry',
     summary: 'Car telemetry firmware for UB SAE — **10** sensors, **5** hardware interfaces, SD logging.',
-    tech: ['C++', 'ESP32'],
+    tech: ['C++', 'ESP32', 'in progress'],
     links: [],
   },
   {
