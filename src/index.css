@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+/*
+ * Terminal themes. Each theme sets the --t-* variables; Tailwind's color
+ * tokens below point at them, so `bg-bg`, `text-accent`, `border-line`, etc.
+ * follow whichever theme is active on <html data-theme="...">.
+ */
+:root,
+[data-theme='phosphor'] {
+  --t-bg: #07100a;
+  --t-panel: #0b1610;
+  --t-line: #1f3527;
+  --t-fg: #d7e9db;
+  --t-dim: #8fae96;
+  --t-accent: #5ee38a;
+  --t-dir: #5ee38a;
+  --t-key: #5ee38a;
+  --t-str: #5ee38a;
+  --t-num: #d7e9db;
+  --t-err: #ff9b8a;
+}
+
+[data-theme='amber'] {
+  --t-bg: #0f0a04;
+  --t-panel: #160f07;
+  --t-line: #3a2a14;
+  --t-fg: #f4e3c8;
+  --t-dim: #bc9e74;
+  --t-accent: #ffb347;
+  --t-dir: #ffb347;
+  --t-key: #ffb347;
+  --t-str: #ffb347;
+  --t-num: #f4e3c8;
+  --t-err: #ff9b8a;
+}
+
+[data-theme='mono'] {
+  --t-bg: #0c0c0c;
+  --t-panel: #121212;
+  --t-line: #2e2e2e;
+  --t-fg: #e8e8e8;
+  --t-dim: #a0a0a0;
+  --t-accent: #ffffff;
+  --t-dir: #ffffff;
+  --t-key: #ffffff;
+  --t-str: #ffffff;
+  --t-num: #e8e8e8;
+  --t-err: #ff9b8a;
+}
+
+[data-theme='tokyonight'] {
+  --t-bg: #1e2030;
+  --t-panel: #222436;
+  --t-line: #3b4261;
+  --t-fg: #c8d3f5;
+  --t-dim: #828bb8;
+  --t-accent: #82aaff;
+  --t-dir: #c099ff;
+  --t-key: #86e1fc;
+  --t-str: #c3e88d;
+  --t-num: #ff966c;
+  --t-err: #ff757f;
+}
+
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: var(--t-bg);
+  --color-panel: var(--t-panel);
+  --color-line: var(--t-line);
+  --color-fg: var(--t-fg);
+  --color-dim: var(--t-dim);
+  --color-accent: var(--t-accent);
+  --color-dir: var(--t-dir);
+  --color-key: var(--t-key);
+  --color-str: var(--t-str);
+  --color-num: var(--t-num);
+  --color-err: var(--t-err);
+
+  --animate-blink: blink 1.05s steps(1) infinite;
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--t-bg);
+  }
+
+  body {
+    @apply bg-bg font-mono text-[15px] leading-relaxed text-fg antialiased;
+  }
+
+  a {
+    @apply underline underline-offset-4 transition-opacity hover:opacity-75;
+  }
+
+  ::selection {
+    background: var(--t-accent);
+    color: var(--t-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--t-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .animate-blink {
+      animation: none;
+    }
+  }
+}
