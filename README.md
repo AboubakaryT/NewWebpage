@@ -37,6 +37,5 @@ Arrow keys browse history, Tab completes a command name, Ctrl+L clears.
 
 ## TODO
 
-- [ ] Add repo links for `http-server-c`, `esp32-telemetry` and `chain-fee-scraper` in `src/data/profile.ts` (currently `#`).
-- [ ] Put your resume at `public/resume.pdf`.
+NONE
 # NewWebpage
