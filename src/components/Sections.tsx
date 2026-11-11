@@ -38,7 +38,7 @@ export function About({ onDone }: { onDone: () => void }) {
   const [first, ...rest] = shown.split(' ')
 
   return (
-    <section id="about" aria-label="About" className="flex scroll-mt-6 flex-col gap-3.5">
+    <section id="about" aria-label="About" className="flex scroll-mt-16 flex-col gap-3.5">
       <Prompt>whoami</Prompt>
       <h1
         aria-label={full}

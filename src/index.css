@@ -98,7 +98,9 @@
   }
 
   body {
-    @apply bg-bg font-mono text-[15px] leading-relaxed text-fg antialiased;
+    @apply bg-bg font-mono text-[14px] leading-relaxed text-fg antialiased sm:text-[15px];
+    -webkit-text-size-adjust: 100%;
+    overflow-wrap: anywhere;
   }
 
   a {

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { profile } from '../data/profile'
 
 const TABS = [
@@ -17,7 +18,7 @@ export function TitleBar() {
           <span key={i} className="size-[11px] rounded-full border border-dim" />
         ))}
       </span>
-      <span className="flex-1 text-center text-[13px] text-dim">
+      <span className="min-w-0 flex-1 truncate text-center text-[13px] text-dim">
         {profile.handle}@atraore: ~ — zsh
       </span>
       <span className="hidden text-[13px] text-dim sm:inline">80×24</span>
@@ -25,10 +26,28 @@ export function TitleBar() {
   )
 }
 
-/** tmux-style status bar used as the site nav. */
+/**
+ * tmux-style status bar used as the site nav. Sticks to the top while you scroll;
+ * on phones it stays one row and scrolls sideways instead of wrapping.
+ */
 export function TabBar({ active }: { active: string }) {
+  const navRef = useRef<HTMLElement>(null)
+
+  // Keep the highlighted tab visible inside the sideways-scrolling bar.
+  useEffect(() => {
+    const nav = navRef.current
+    const tab = nav?.querySelector<HTMLElement>('[aria-current="true"]')
+    if (!nav || !tab) return
+    const left = tab.offsetLeft - nav.clientWidth / 2 + tab.clientWidth / 2
+    nav.scrollTo({ left, behavior: 'smooth' })
+  }, [active])
+
   return (
-    <nav aria-label="Sections" className="flex flex-wrap border-b border-line text-[13px]">
+    <nav
+      ref={navRef}
+      aria-label="Sections"
+      className="sticky top-0 z-10 flex overflow-x-auto border-b border-line bg-panel text-[13px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
       {TABS.map((tab, i) => {
         const isActive = active === tab.href.slice(1)
         return (
@@ -36,7 +55,7 @@ export function TabBar({ active }: { active: string }) {
             key={tab.href}
             href={tab.href}
             aria-current={isActive ? 'true' : undefined}
-            className={`px-3.5 py-2 no-underline hover:opacity-100 ${
+            className={`flex min-h-11 shrink-0 items-center px-3.5 whitespace-nowrap no-underline hover:opacity-100 sm:min-h-0 sm:py-2 ${
               isActive ? 'bg-accent font-bold text-bg' : 'hover:bg-line'
             } ${tab.label === 'shell*' && !isActive ? 'text-accent' : ''}`}
           >

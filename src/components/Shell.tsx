@@ -70,9 +70,10 @@ export function Shell({ onTheme }: { onTheme: (t: Theme) => void }) {
   }
 
   return (
-    <section id="shell" aria-label="Interactive shell" className="flex scroll-mt-6 flex-col gap-2.5 border-t border-dashed border-line pt-6">
+    <section id="shell" aria-label="Interactive shell" className="flex scroll-mt-16 flex-col gap-2.5 border-t border-dashed border-line pt-6">
       <div className="text-[13px] text-dim">
-        ── interactive shell · type <span className="text-accent">help</span> · ↑↓ history · tab to complete ──
+        ── interactive shell · type <span className="text-accent">help</span>
+        <span className="hidden sm:inline"> · ↑↓ history · tab to complete</span> ──
       </div>
 
       {/* Clicking anywhere in the output focuses the prompt, like a real terminal. */}
@@ -83,7 +84,11 @@ export function Shell({ onTheme }: { onTheme: (t: Theme) => void }) {
               <span className="text-accent">❯</span> {l.text}
             </div>
           ) : (
-            <div key={l.id} className={`whitespace-pre-wrap ${l.kind === 'err' ? 'text-err' : ''}`}>
+            // Column-aligned output keeps its alignment and scrolls sideways on narrow screens.
+            <div
+              key={l.id}
+              className={`overflow-x-auto [overflow-wrap:normal] whitespace-pre [scrollbar-width:thin] ${l.kind === 'err' ? 'text-err' : ''}`}
+            >
               {l.text}
             </div>
           ),
@@ -112,7 +117,8 @@ export function Shell({ onTheme }: { onTheme: (t: Theme) => void }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          className="min-h-11 min-w-0 flex-1 bg-transparent text-fg caret-accent outline-none placeholder:text-dim/60"
+          enterKeyHint="go"
+          className="min-h-11 min-w-0 flex-1 bg-transparent text-base text-fg caret-accent outline-none placeholder:text-dim/60 sm:text-[15px]"
         />
         <button type="submit" className="min-h-11 cursor-pointer bg-accent px-4 text-[13px] text-bg hover:opacity-90">
           run ⏎

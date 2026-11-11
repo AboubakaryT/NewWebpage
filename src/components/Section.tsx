@@ -10,7 +10,7 @@ type Props = {
 /** A block that looks like a command followed by its output. */
 export function Section({ id, label, command, children }: Props) {
   return (
-    <section id={id} aria-label={label} className="flex scroll-mt-6 flex-col gap-3.5">
+    <section id={id} aria-label={label} className="flex scroll-mt-16 flex-col gap-3.5">
       <Prompt>{command}</Prompt>
       {children}
     </section>

@@ -36,15 +36,16 @@ export default function App() {
   const fade = `transition-opacity duration-700 ${introDone ? 'opacity-100' : 'opacity-0'}`
 
   return (
-    <div className="min-h-screen bg-bg px-3.5 pt-7 pb-16">
-      <main className="mx-auto max-w-[920px] border border-line bg-panel">
+    <div className="min-h-screen bg-bg pb-10 sm:px-3.5 sm:pt-7 sm:pb-16">
+      {/* Full-bleed on phones; framed terminal window from `sm` up. */}
+      <main className="mx-auto max-w-[920px] border-line bg-panel sm:border">
         <TitleBar />
-        <div className={fade}>
+        <div className={`sticky top-0 z-10 ${fade}`}>
           <TabBar active={active} />
         </div>
-        <div className="flex flex-col gap-9 px-5 pt-6.5 pb-8.5 sm:px-6.5">
+        <div className="flex flex-col gap-8 px-4 pt-6 pb-8 sm:gap-9 sm:px-6.5 sm:pt-6.5 sm:pb-8.5">
           <About onDone={finishIntro} />
-          <div className={`flex flex-col gap-9 ${fade}`}>
+          <div className={`flex flex-col gap-8 sm:gap-9 ${fade}`}>
             <Experience />
             <Projects />
             <School />
@@ -55,7 +56,7 @@ export default function App() {
           </div>
         </div>
       </main>
-      <footer className={`mx-auto mt-4 max-w-[920px] text-center text-xs text-dim ${fade}`}>
+      <footer className={`mx-auto mt-4 max-w-[920px] px-4 text-center text-xs text-dim ${fade}`}>
         © {YEAR} Aboubakary Traore · built with React, TypeScript &amp; Tailwind
       </footer>
     </div>
