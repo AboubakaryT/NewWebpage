@@ -51,7 +51,7 @@ export const experience: Experience[] = [
     company: 'UB Society of Automotive Engineers',
     role: 'Embedded Software Engineer',
     location: 'Buffalo, NY',
-    dates: 'Sep 2026–present',
+    dates: 'Nov 2026–present',
     bullets: [
       'Object-oriented C++ firmware for an ESP32 car telemetry system with **10** sensor units (temp, GPS, IMU, suspension, drivetrain).',
       'Interrupt-driven Hall-effect RPM measurement with debouncing and a **20**-sample moving average.',
